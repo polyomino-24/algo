@@ -3,7 +3,8 @@ template<typename T>
 struct SegmentTree{
     int n;
     vector<T> node;
-    vector<T> lazy, lazy_flag;
+    vector<T> lazy;
+    vector<bool> lazy_flag;
     const T id = 0;
     SegmentTree(const vector<T>&d){
         n = 1;
