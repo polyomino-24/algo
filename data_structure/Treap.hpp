@@ -83,6 +83,17 @@ struct Treap{
             return find(t -> r, key);
         }
     }
+    //0-index
+    int kth_element(NP t, int k){
+        int sz = cnt(t -> l);
+        if(sz == k){
+            return t -> key;
+        }else if(sz > k){
+            return kth_element(t -> l, k);
+        }else{
+            return kth_element(t -> r, k - sz - 1);
+        }
+    }
     NP root;
     Treap():root(nullptr){}
     int size(){
@@ -96,5 +107,9 @@ struct Treap{
     }
     bool find(int key){
         return find(root, key);
+    }
+    int kth_element(int k){
+        assert(k < size());
+        return kth_element(root, k);
     }
 };
