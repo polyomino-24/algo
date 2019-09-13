@@ -3,7 +3,7 @@ struct Treap{
         int key;
         int priority;
         Node *l, *r;
-        int cnt = 0;
+        int cnt;
         Node(){}
         Node(int _key, int _priority) : key(_key), priority(_priority), l(nullptr), r(nullptr),cnt(1){}
     };
@@ -109,7 +109,7 @@ struct Treap{
         return find(root, key);
     }
     int kth_element(int k){
-        assert(k < size());
+        // assert(k < size());
         return kth_element(root, k);
     }
 };
