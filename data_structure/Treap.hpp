@@ -3,18 +3,29 @@ struct Treap{
         int key;
         int priority;
         Node *l, *r;
+        int cnt = 0;
         Node(){}
-        Node(int _key, int _priority) : key(_key), priority(_priority), l(nullptr), r(nullptr){}
+        Node(int _key, int _priority) : key(_key), priority(_priority), l(nullptr), r(nullptr),cnt(1){}
     };
     using NP = Node*;
+    int cnt(NP t){
+        if(!t) return 0;
+        else return t -> cnt;
+    }
+    void update_cnt(NP t){
+        if(!t) return;
+        t -> cnt = 1 + cnt(t -> l) + cnt(t -> r);
+    }
     NP merge(NP l, NP r){
         if(!l) return r;
         if(!r) return l;
         if(l -> priority > r -> priority){
             l ->r = merge(l -> r, r);
+            update_cnt(l);
             return l;
         }else{
             r -> l = merge(l, r -> l);
+            update_cnt(r);
             return r;
         }
     }
@@ -24,16 +35,19 @@ struct Treap{
         if(key < t -> key){
             auto s = split(t -> l, key);
             t -> l = s.second;
+            update_cnt(t);
             return make_pair(s.first, t);
         }else{
             auto s = split(t -> r, key);
             t -> r = s.first;
+            update_cnt(t);
             return make_pair(t, s.second);
         }
     }
     void insert(NP &t, NP a){
         if(!t){
             t = a;
+            update_cnt(t);
             return;
         }
         if(a -> priority > t -> priority){
@@ -46,6 +60,7 @@ struct Treap{
                 insert(t -> r, a);
             }
         }
+        update_cnt(t);
     }
     void erase(NP &t, int key){
         if(!t) return;
@@ -56,6 +71,7 @@ struct Treap{
         }else{
             erase(t -> r, key);
         }
+        update_cnt(t);
     }
     bool find(NP t, int key){
         if(!t) return false;
@@ -69,6 +85,9 @@ struct Treap{
     }
     NP root;
     Treap():root(nullptr){}
+    int size(){
+        return cnt(root);
+    }
     void insert(int key){
         insert(root, new Node(key,rand()));
     }
