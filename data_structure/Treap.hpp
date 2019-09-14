@@ -1,11 +1,12 @@
+template<typename T>
 struct Treap{
     struct Node{
-        int key;
+        T key;
         int priority;
         Node *l, *r;
         int cnt;
         Node(){}
-        Node(int _key, int _priority) : key(_key), priority(_priority), l(nullptr), r(nullptr),cnt(1){}
+        Node(T _key, int _priority) : key(_key), priority(_priority), l(nullptr), r(nullptr),cnt(1){}
     };
     using NP = Node*;
     int cnt(NP t){
@@ -30,7 +31,7 @@ struct Treap{
         }
     }
     //key未満,key以上に分割
-    pair<NP, NP> split(NP t, int key){
+    pair<NP, NP> split(NP t, T key){
         if(!t) return make_pair(nullptr, nullptr);
         if(key < t -> key){
             auto s = split(t -> l, key);
@@ -62,7 +63,7 @@ struct Treap{
         }
         update_cnt(t);
     }
-    void erase(NP &t, int key){
+    void erase(NP &t, T key){
         if(!t) return;
         if(t -> key == key){
             t = merge(t -> l, t -> r);
@@ -73,7 +74,7 @@ struct Treap{
         }
         update_cnt(t);
     }
-    bool find(NP t, int key){
+    bool find(NP t, T key){
         if(!t) return false;
         if(t -> key == key){
             return true;
@@ -84,7 +85,7 @@ struct Treap{
         }
     }
     //0-index
-    int kth_element(NP t, int k){
+    T kth_element(NP t, int k){
         int sz = cnt(t -> l);
         if(sz == k){
             return t -> key;
@@ -99,7 +100,7 @@ struct Treap{
     int size(){
         return cnt(root);
     }
-    void insert(int key){
+    void insert(T key){
         insert(root, new Node(key,rand()));
     }
     void erase(int key){
@@ -108,7 +109,7 @@ struct Treap{
     bool find(int key){
         return find(root, key);
     }
-    int kth_element(int k){
+    T kth_element(int k){
         // assert(k < size());
         return kth_element(root, k);
     }
