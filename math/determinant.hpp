@@ -1,6 +1,6 @@
 //T:誤差なしで計算できる型を想定(基本的にmodint)
 template<typename T>
-T det(vector<vector<T>> &a){
+T det(vector<vector<T>> a){
     int n = (int) a.size();
     if(n == 0){
         return 0;
