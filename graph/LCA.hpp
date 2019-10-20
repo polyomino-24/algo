@@ -7,11 +7,11 @@ struct LCA{
     vector<int>parent;
     vector<int> depth;
     vector<vector<int>> dp;
-    void add_edge(int a,int b){
+    void add_edge(int a, int b){
         g[a].push_back(b);
         g[b].push_back(a);
     }
-    void dfs(int s, int p,int d){
+    void dfs(int s, int p, int d){
         depth[s] = d;
         parent[s] = p;
         for(int x : g[s]){
@@ -19,11 +19,11 @@ struct LCA{
             dfs(x, s, d + 1);
         }
     }
-    LCA(int N,int root = 0):n(N),g(n),parent(n),depth(n),root(root),lg(31 - __builtin_clz(n)),dp(lg + 1,vector<int>(n)){
+    LCA(int N, int root = 0):n(N),g(n),parent(n),depth(n),root(root),lg(31 - __builtin_clz(n)),dp(lg + 1,vector<int>(n)){
     }
     void cal(){
         parent[root] = root;
-        dfs(0,0,0);
+        dfs(root, root, 0);
         dp[0] = parent;
         for(int i = 1; i <= lg; i++){
             for(int j = 0; j < n; j++){
@@ -31,7 +31,7 @@ struct LCA{
             }
         }
     }
-    int up(int a,int num){
+    int up(int a, int num){
         if(!num)return a;
         int h = 31 - __builtin_clz(num);
         for(int i = h; i >= 0 and num > 0; i--){
