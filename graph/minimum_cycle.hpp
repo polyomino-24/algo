@@ -48,3 +48,5 @@ ll minimum_cycle_length(const vector<vector<int>>&a){
     }
     return ans;
 }
+
+//https://codeforces.com/gym/100917/problem/F
