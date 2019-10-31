@@ -1,10 +1,10 @@
 template<typename T>
 struct BIT{
-    int n;
+    const int n;
     vector<T> dat;
     BIT(){}
     BIT(int N) : n(N + 1), dat(n, T()){}
-    BIT(const vector<T> & a) : n((int) a.size() + 1), dat(n, T()){
+    BIT(const vector<T> & a) : n((int) a.size() + 1), dat(n, T(0)){
         for(int i = 0; i < n - 1; i++){
             add(i, a[i]);
         }
@@ -21,7 +21,7 @@ struct BIT{
     T sum(int i){
         i++;
         T res = 0;
-        while(i){
+        while(i > 0){
             res += dat[i];
             i -= i & - i;
         }
