@@ -2,7 +2,8 @@ struct edge{
     int to, cost;
     edge(int a = 0, int b = 0) : to(a), cost(b) {}
 };
-vector<ll> dijkstra(int s, const vector<vector<edge>> &g){
+template<class E>
+vector<ll> dijkstra(int s, const vector<vector<E>> &g){
     int n = (int)g.size();
     vector<ll> dist(n, 1LL<<60);
     using ll_i = pair<ll, int>;
@@ -14,7 +15,7 @@ vector<ll> dijkstra(int s, const vector<vector<edge>> &g){
         pq.pop();
         int v = a.second;
         if(a.first > dist[v])continue;
-        for(auto &x:g[v]){
+        for(auto &x : g[v]){
             if(dist[x.to] > dist[v] + x.cost){
                 dist[x.to] = dist[v] + x.cost;
                 pq.push({dist[x.to], x.to});
