@@ -22,5 +22,10 @@ int longest_palindrome(const string &s){
         t += '#';
     }
     auto d = manacher(t);
+    /*
+    int id = (int)(max_element(d.begin(), d.end()) - d.begin());
+    int len = d[id] - 1;
+    return s.substr(id/2-len/2,len);
+    */
     return *max_element(d.begin(), d.end()) - 1;
 }
