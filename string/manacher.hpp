@@ -23,6 +23,7 @@ int longest_palindrome(const string &s){
     }
     auto d = manacher(t);
     /*
+       https://cses.fi/problemset/task/1111/
     int id = (int)(max_element(d.begin(), d.end()) - d.begin());
     int len = d[id] - 1;
     return s.substr(id/2-len/2,len);
