@@ -39,7 +39,7 @@ struct SegmentTree{
     Node query(const int a, const int b, int k = 0, int l = 0, int r = -1){
         if(r < 0)r = n;
         if(r <= a or b <= l){
-            return Node::id;
+            return Node();
         }
         if(a <= l and r <= b){
             return seg[k];
