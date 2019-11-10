@@ -63,3 +63,11 @@ Node query(const int a, const int b, int k = 0, int l = 0, int r = -1){
     if(a <= l && r <= b) return d[k];
     return query(a, b, 2 * k + 1, l, (l + r) / 2) + query(a, b, 2 * k + 2, (l + r) / 2, r);
 }
+
+int main(){
+    vector<ll>a = {-2, -3, 4, -1, -2, 1, 5, -3};
+    init(a);
+    cout << query(4,8).ans << endl;//6
+    update(0,1,10);
+    cout << query(0,3).ans << endl;//11
+}
