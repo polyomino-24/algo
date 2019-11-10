@@ -1,4 +1,22 @@
 //verifyいいえ
+struct Node{
+    using T = long long;
+    static constexpr T INF = 1LL<<60;
+    T ans, sum, left, right;
+    Node():ans(-INF),sum(0), left(-INF), right(-INF){}
+    Node(T val, int len){
+        sum = val * len;
+        ans = left = right = (val > 0 ? sum : val);
+    }
+    Node operator+(const Node &b){
+        Node res;
+        res.ans = max({ans, b.ans, right+b.left});
+        res.sum = sum + b.sum;
+        res.left = max(left, sum + b.left);
+        res.right = max(b.right, right + b.sum);
+        return res;
+    }
+};
 vector<Node> d;
 vector<typename Node::T>lazy;
 int sz;
