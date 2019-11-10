@@ -28,7 +28,7 @@ public:
             node[x] = min(node[2 * x + 1], node[2 * x + 2]);
         }
     }
-    T query(const int a,const int b,int k = 0, int l = 0, int r = -1){
+    T query(const int a, const int b, int k = 0, int l = 0, int r = -1){
         if(r < 0)r = n;
         if(r <= a or b <= l){
             return id;
