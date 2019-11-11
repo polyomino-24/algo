@@ -30,7 +30,7 @@ struct SegmentTree{
     }
     void update(int x, T k){
         x += n - 1;
-        seg[x] = k;
+        seg[x] = Node(k);
         while(x){
             x = (x - 1) / 2;
             seg[x] = merge(seg[2 * x + 1], seg[2 * x + 2]);
