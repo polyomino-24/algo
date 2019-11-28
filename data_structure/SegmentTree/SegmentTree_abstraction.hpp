@@ -36,6 +36,14 @@ struct SegmentTree{
             seg[x] = merge(seg[2 * x + 1], seg[2 * x + 2]);
         }
     }
+    void update(int x, Node k){
+        x += n - 1;
+        seg[x] = k;
+        while(x){
+            x = (x - 1) / 2;
+            seg[x] = merge(seg[2 * x + 1], seg[2 * x + 2]);
+        }
+    }
     Node query(const int a, const int b, int k = 0, int l = 0, int r = -1){
         if(r < 0)r = n;
         if(r <= a or b <= l){
