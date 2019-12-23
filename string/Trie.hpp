@@ -20,6 +20,7 @@ struct Trie{
             if(!now -> next[i]){
                 now -> next[i] = new Node();
             }
+            now = now -> next[i];
         }
     }
     void query(NP *now){
