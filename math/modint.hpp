@@ -4,7 +4,7 @@ class Modint{
 public:
     int a;
     Modint(const long long v = 0):a(v % MOD){}
-    int getmod() const{
+    static constexpr int getmod(){
         return MOD;
     }
     Modint operator+(const Modint rhs) const{
