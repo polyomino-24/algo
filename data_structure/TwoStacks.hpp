@@ -1,18 +1,18 @@
-struct TwoStack{
+struct TwoStacks{
     using T = int;
-    struct node{
+    struct Node{
         T val, sum;
-        node(const T &val, const T &sum):val(val), sum(sum){}
+        Node(const T &val, const T &sum):val(val), sum(sum){}
     };
-    T op(T l, T r){
+    T merge(T l, T r){
         return min(l, r);
     }
-    stack<node> front, back;
+    stack<Node> front, back;
     T eval(){
 //        assert(front.size() + back.size() > 0);
         if(!back.empty()){
             if(!front.empty()){
-                return op(front.top().sum, back.top().sum);
+                return merge(front.top().sum, back.top().sum);
             }else{
                 return back.top().sum;
             }
@@ -26,7 +26,7 @@ struct TwoStack{
             front.emplace(back.top().val, back.top().val);
             back.pop();
             while(!back.empty()){
-                front.emplace(back.top().val, op(back.top().val, front.top().sum));
+                front.emplace(back.top().val, merge(back.top().val, front.top().sum));
                 back.pop();
             }
         }
@@ -34,7 +34,7 @@ struct TwoStack{
     }
     void push_back(const T &val){
         if(!back.empty()){
-            back.emplace(val, op(back.top().sum, val));
+            back.emplace(val, merge(back.top().sum, val));
         }else{
             back.emplace(val, val);
         }
