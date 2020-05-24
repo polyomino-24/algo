@@ -103,10 +103,10 @@ struct Treap{
     void insert(T key){
         insert(root, new Node(key,rand()));
     }
-    void erase(int key){
+    void erase(T key){
         erase(root,key);
     }
-    bool find(int key){
+    bool find(T key){
         return find(root, key);
     }
     T kth_element(int k){
