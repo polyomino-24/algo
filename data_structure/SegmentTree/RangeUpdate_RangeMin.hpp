@@ -1,4 +1,4 @@
-//Range add, Range min
+//Range update, Range min
 template<typename T>
 struct SegmentTree{
     int n;
