@@ -1,19 +1,35 @@
-vector<int> manacher(const string& s){
-    int n = (int) s.size();
-    vector<int> res(n);
-    for(int i = 0, j = 0; i < n;){
-        while(i - j >= 0 and i + j < n and s[i - j] == s[i + j])j++;
-        res[i] = j;
-        int k = 1;
-        while(i - k >= 0 and i + k < n and k + res[i - k] < j){
-            res[i + k] = res[i - k];
-            k++;
+class Manacher{
+public:
+    static vector<int> solve(const string& s){
+        int n = (int) s.size();
+        vector<int>d(n);
+        for(int i = 0, l = 0, r = -1; i < n; i++){
+            int k = i > r ? 1 : min(d[l + r - i], r - i + 1);
+            while(i - k >= 0 and i + k < n and s[i - k] == s[i + k])k++;
+            d[i] = k--;
+            if(i + k > r){
+                r = i + k;
+                l = i - k;
+            }
         }
-        i += k;
-        j -= k;
+        return d;
     }
-    return res;
-}
+    static vector<int> solve_even(const string& s){
+        int n = (int) s.size();
+        vector<int>d(n);
+        for(int i = 0, l = 0, r = -1; i < n; i++){
+            int k = i > r ? 0 : min(d[l + r - i + 1], r - i + 1);
+            while(i - k - 1 >= 0 and i + k < n and s[i - k - 1] == s[i + k])k++;
+            d[i] = k--;
+            if(i + k > r){
+                r = i + k;
+                l = i - k - 1;
+            }
+        }
+        return d;
+    }
+};
+
 int longest_palindrome(const string &s){
     string t;
     t += '#';
