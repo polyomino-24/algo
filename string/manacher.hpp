@@ -14,6 +14,8 @@ public:
         }
         return d;
     }
+    //abba
+    //0020
     static vector<int> solve_even(const string& s){
         int n = (int) s.size();
         vector<int>d(n);
@@ -37,7 +39,7 @@ int longest_palindrome(const string &s){
         t += c;
         t += '#';
     }
-    auto d = manacher(t);
+    auto d = Manacher::solve(t);
     /*
        https://cses.fi/problemset/task/1111/
     int id = (int)(max_element(d.begin(), d.end()) - d.begin());
